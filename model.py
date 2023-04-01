@@ -52,10 +52,18 @@ class process_variable(object):
 
         
 class fo_filter(object):
-    def __init__(self, wc, dt):
-        self.wc = wc
-        self.dt = dt
-        self.t = 0.
-        self.y = 0.
-                
+    def __init__(self, wc, z_0, dt):
+        self.z = z_0
+        self.alpha = dt / ((1/wc) + dt)
+        
+        # step counter
+        self.i = 0
+        
+    def filt(self, data):
+        if self.i == 0:
+            self.i += 1
+        else:
+            self.z = self.alpha * data + (1-self.alpha) * self.z
+            self.i += 1
+        return self.z
 
