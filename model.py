@@ -46,7 +46,7 @@ class process_variable(object):
         
     def step(self, u):
         self.x = np.dot(self.Ad, self.x) + (self.Bd * u)
-        self.y = np.dot(np.array([self.wn**2, 0.]),  self.x) + np.random(0,1)
+        self.y = np.dot(np.array([self.wn**2, 0.]),  self.x) + np.random.normal(0,1)
         return self.y
 
         
