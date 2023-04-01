@@ -37,7 +37,8 @@ class process_variable(object):
         # initial conditions
         self.x = x_0
         self.u = u_0
-        self.y = np.dot(np.array([0., 1.]),  x_0)
+        self.wn = wn
+        self.y = np.dot(np.array([wn**2, 0.]),  x_0)
         
         # discretized process model
         self.Ad = np.eye(2) + np.array([[0., 1.], [-(wn**2.), (-2.)*zeta*wn]]) * dt
@@ -45,7 +46,7 @@ class process_variable(object):
         
     def step(self, u):
         self.x = np.dot(self.Ad, self.x) + (self.Bd * u)
-        self.y = np.dot(np.array([0., 1.]),  self.x)
+        self.y = np.dot(np.array([self.wn**2, 0.]),  self.x) + np.random(0,1)
         return self.y
 
         
