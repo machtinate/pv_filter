@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from model import process_variable
 
 dt = 0.1
-m = process_variable(0.2, 0.7, 0., 0., dt)
+m = process_variable(0.2, 0.7, 0., 0., dt, 0.1)
 
 t = np.arange(0, 30, dt)
 op = np.where(t < 1, 0, 1)

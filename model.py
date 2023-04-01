@@ -33,11 +33,12 @@ import numpy as np
 
 class process_variable(object):
     
-    def __init__(self, zeta, wn, x_0, u_0, dt):
+    def __init__(self, zeta, wn, x_0, u_0, dt, sigma):
         # initial conditions
         self.x = x_0
         self.u = u_0
         self.wn = wn
+        self.sigma = sigma
         self.y = np.dot(np.array([wn**2, 0.]),  x_0)
         
         # discretized process model
@@ -46,7 +47,7 @@ class process_variable(object):
         
     def step(self, u):
         self.x = np.dot(self.Ad, self.x) + (self.Bd * u)
-        self.y = np.dot(np.array([self.wn**2, 0.]),  self.x) + np.random.normal(0,1)
+        self.y = np.dot(np.array([self.wn**2, 0.]),  self.x) + np.random.normal(0, self.sigma)
         return self.y
 
         
